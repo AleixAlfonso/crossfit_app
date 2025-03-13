@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243346530618",
+    "project_id": "crossfit-lleida-7ab34",
+    "storage_bucket": "crossfit-lleida-7ab34.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243346530618:android:072182b3e841d85d297003",
+        "android_client_info": {
+          "package_name": "com.aleix_alfonso.recipeapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVp9Y_XxT0WmIm_vsu4odqE7Q9ogZIedA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
