@@ -1,6 +1,7 @@
 package com.aleix_alfonso.recipeapp
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -20,6 +21,9 @@ import com.aleix_alfonso.recipeapp.screens.login.ui.LoginScreen
 import com.aleix_alfonso.recipeapp.screens.notifications.NotificationsScreen
 import com.aleix_alfonso.recipeapp.screens.profile.ProfileScreen
 import com.aleix_alfonso.recipeapp.screens.shop.ui.ShopItemDetails
+import com.aleix_alfonso.recipeapp.screens.signup.ui.SignUpPage
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -28,14 +32,31 @@ fun NavigationStack(
     navController: NavHostController,
     showBottomBar: (Boolean) -> Unit,
 ) {
-
+    var auth = Firebase.auth
+    var startDestination = if (auth.currentUser != null) Screen.Home.route else Screen.Login.route
     NavHost(
         navController = navController,
-        startDestination = Screen.Login.route,
+        startDestination = startDestination,
     ) {
-        composable(route = Screen.Login.route){
+        composable(route = Screen.Login.route) {
             showBottomBar(false)
-            LoginScreen()
+            LoginScreen(
+                navigateToSignup = { navController.navigate(Screen.Signup.route) },
+                onLoginClick = { email, password ->
+                    auth.signInWithEmailAndPassword(
+                        email,
+                        password
+                    ).addOnCompleteListener() { task ->
+                        if (task.isSuccessful) {
+                            navController.navigate(Screen.Home.route) {
+                                popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                                launchSingleTop = true
+                            }
+                        } else {
+                            Log.i("Login", task.exception.toString())
+                        }
+                    }
+                })
         }
         composable(route = Screen.Home.route) {
             showBottomBar(true)
@@ -50,9 +71,33 @@ fun NavigationStack(
 
             NotificationsScreen(navController = navController)
         }
+        composable(route = Screen.Signup.route) {
+            showBottomBar(false)
+            SignUpPage(onSignUpClick = { email, password ->
+                auth.createUserWithEmailAndPassword(
+                    email, password
+                ).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        navController.navigate(Screen.Login.route) {
+                            popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    } else {
+                        Log.e("Login error", task.exception.toString())
+                    }
+                }
+            }, navigateToLogin = { navController.navigate(Screen.Login.route) })
+        }
         composable(route = Screen.Profile.route) {
             showBottomBar(true)
-            ProfileScreen(navController = navController)
+            ProfileScreen(
+                navController = navController,
+                onLogout = {
+                    auth.signOut(); navController.navigate(Screen.Login.route) {
+                    popUpTo(navController.graph.startDestinationId) { inclusive = true }
+                    launchSingleTop = true
+                }
+                })
         }
         composable(route = Screen.Schedule.route) {
             showBottomBar(false)

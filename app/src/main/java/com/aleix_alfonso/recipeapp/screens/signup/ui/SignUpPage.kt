@@ -1,4 +1,4 @@
-package com.aleix_alfonso.recipeapp.screens.login.ui
+package com.aleix_alfonso.recipeapp.screens.signup.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -36,18 +36,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aleix_alfonso.recipeapp.R
-import com.aleix_alfonso.recipeapp.screens.login.LoginViewModel
+import com.aleix_alfonso.recipeapp.screens.signup.SignUpPageViewModel
 import com.aleix_alfonso.recipeapp.ui.components.CrossfitAppScreenContainer
-import com.aleix_alfonso.recipeapp.ui.components.TopBarCustom
-
 
 @Composable
-fun LoginScreen(
-    onLoginClick: (String, String) -> Unit,
-    modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = viewModel(),
-    navigateToSignup: () -> Unit
+fun SignUpPage(
+    onSignUpClick: (String, String) -> Unit,
+    navigateToLogin: () -> Unit,
+    viewModel: SignUpPageViewModel = viewModel(),
+    modifier: Modifier = Modifier
 ) {
+
     CrossfitAppScreenContainer(scrollEnabled = false, content = {
         Column(
             verticalArrangement = Arrangement.Center,
@@ -56,7 +55,6 @@ fun LoginScreen(
                 .fillMaxSize()
                 .padding(vertical = 24.dp)
         ) {
-
             Image(
                 painter = painterResource(R.drawable.crossfit_icon),
                 contentDescription = null,
@@ -64,17 +62,16 @@ fun LoginScreen(
                     CircleShape
                 )
             )
-
-            Text("Iniciar Sesión", fontSize = 32.sp)
+            Text("Registro", fontSize = 32.sp)
             Spacer(modifier = Modifier.height(16.dp))
 
-            CustomTextField(
+            CustomTextFieldSignUp(
                 viewModel = viewModel,
                 value = viewModel.email,
                 onValueChange = { viewModel.onEmailChange(it) },
             )
             Spacer(modifier = Modifier.height(24.dp))
-            CustomTextField(
+            CustomTextFieldSignUp(
                 viewModel = viewModel,
                 value = viewModel.password,
                 isPassword = true,
@@ -82,41 +79,31 @@ fun LoginScreen(
             )
 
             Spacer(modifier = Modifier.height(24.dp))
-            LoginButton(onLoginClick = { onLoginClick(viewModel.email, viewModel.password) })
+            SignUpButton(onSignUpClick = { onSignUpClick(viewModel.email, viewModel.password) })
             Spacer(modifier = Modifier.height(8.dp))
 
-            SignUpButton(navigateToSignup)
+            LoginButtonSignUpPage(navigateToLogin)
 
 
         }
     }
 
     )
+
 }
 
 @Composable
-fun LoginButton(onLoginClick: () -> Unit, modifier: Modifier = Modifier) {
+fun SignUpButton(onSignUpClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(onClick = {
-        onLoginClick()
+        onSignUpClick()
     }, modifier = modifier.fillMaxWidth(), shape = RoundedCornerShape(8.dp)) {
-        Text(text = "Iniciar Sesión")
+        Text(text = "Registrarse")
     }
 }
 
 @Composable
-fun SignUpButton(navigateToSignup: () -> Unit, modifier: Modifier = Modifier) {
-    Button(
-        onClick = { navigateToSignup() },
-        modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Text(text = "Crear una cuenta")
-    }
-}
-
-@Composable
-fun CustomTextField(
-    viewModel: LoginViewModel,
+fun CustomTextFieldSignUp(
+    viewModel: SignUpPageViewModel,
     value: String,
     onValueChange: (String) -> Unit,
     isPassword: Boolean = false,
@@ -160,4 +147,16 @@ fun CustomTextField(
         visualTransformation = if (!viewModel.isPasswordVisible && isPassword) PasswordVisualTransformation() else VisualTransformation.None,
 
         )
+
 }
+
+
+@Composable
+fun LoginButtonSignUpPage(navigateToSignup: () -> Unit, modifier: Modifier = Modifier) {
+    Button(onClick = {
+        navigateToSignup()
+    }, modifier = modifier.fillMaxWidth(), shape = RoundedCornerShape(8.dp)) {
+        Text(text = "Ya tengo una cuenta")
+    }
+}
+

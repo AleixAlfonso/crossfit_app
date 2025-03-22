@@ -1,5 +1,6 @@
 package com.aleix_alfonso.recipeapp
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,6 +28,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("NewApi")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +36,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             RecipeAppTheme {
                 var showBottomBar by remember { mutableStateOf(true) }
-                val routes = listOf("schedule_screen")
                 val navController: NavHostController = rememberNavController()
 
                 CrossfitAppScreenContainer(

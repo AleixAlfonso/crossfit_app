@@ -22,8 +22,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TopBarCustom(
     title: String,
-    onArrowBackClick: () -> Unit,
-    arrowBackEnabled: Boolean,
+    onArrowBackClick: () -> Unit = {},
+    arrowBackEnabled: Boolean = false,
     modifier: Modifier = Modifier,
     actions: List<@Composable () -> Unit> = listOf<@Composable () -> Unit>(),
 ) {
@@ -31,7 +31,7 @@ fun TopBarCustom(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(40.dp)
+            .height(52.dp)
             .background(color = MaterialTheme.colorScheme.primary)
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
