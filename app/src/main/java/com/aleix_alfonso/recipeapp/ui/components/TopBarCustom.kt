@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TopBarCustom(
     title: String,
+    modifier: Modifier = Modifier,
     onArrowBackClick: () -> Unit = {},
     arrowBackEnabled: Boolean = false,
-    modifier: Modifier = Modifier,
     actions: List<@Composable () -> Unit> = listOf<@Composable () -> Unit>(),
 ) {
 

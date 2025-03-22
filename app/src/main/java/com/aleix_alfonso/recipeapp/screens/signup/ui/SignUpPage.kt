@@ -41,10 +41,10 @@ import com.aleix_alfonso.recipeapp.ui.components.CrossfitAppScreenContainer
 
 @Composable
 fun SignUpPage(
+    modifier: Modifier = Modifier,
     onSignUpClick: (String, String) -> Unit,
     navigateToLogin: () -> Unit,
     viewModel: SignUpPageViewModel = viewModel(),
-    modifier: Modifier = Modifier
 ) {
 
     CrossfitAppScreenContainer(scrollEnabled = false, content = {
@@ -58,9 +58,11 @@ fun SignUpPage(
             Image(
                 painter = painterResource(R.drawable.crossfit_icon),
                 contentDescription = null,
-                modifier = Modifier.padding(24.dp).clip(
-                    CircleShape
-                )
+                modifier = Modifier
+                    .padding(24.dp)
+                    .clip(
+                        CircleShape
+                    )
             )
             Text("Registro", fontSize = 32.sp)
             Spacer(modifier = Modifier.height(16.dp))
@@ -105,9 +107,9 @@ fun SignUpButton(onSignUpClick: () -> Unit, modifier: Modifier = Modifier) {
 fun CustomTextFieldSignUp(
     viewModel: SignUpPageViewModel,
     value: String,
+    modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit,
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier
 ) {
     TextField(
         leadingIcon = {

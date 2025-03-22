@@ -24,8 +24,6 @@ import androidx.navigation.compose.rememberNavController
 import com.aleix_alfonso.recipeapp.ui.components.BottomNavigationBar
 import com.aleix_alfonso.recipeapp.ui.components.CrossfitAppScreenContainer
 import com.aleix_alfonso.recipeapp.ui.theme.RecipeAppTheme
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.firestore
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("NewApi")

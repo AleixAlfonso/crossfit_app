@@ -38,7 +38,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aleix_alfonso.recipeapp.R
 import com.aleix_alfonso.recipeapp.screens.login.LoginViewModel
 import com.aleix_alfonso.recipeapp.ui.components.CrossfitAppScreenContainer
-import com.aleix_alfonso.recipeapp.ui.components.TopBarCustom
 
 
 @Composable
@@ -118,9 +117,9 @@ fun SignUpButton(navigateToSignup: () -> Unit, modifier: Modifier = Modifier) {
 fun CustomTextField(
     viewModel: LoginViewModel,
     value: String,
-    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+            onValueChange: (String) -> Unit,
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier
 ) {
     TextField(
         leadingIcon = {

@@ -1,12 +1,10 @@
 package com.aleix_alfonso.recipeapp.screens.signup
 
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 
 class SignUpPageViewModel:ViewModel(){
 
