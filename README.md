@@ -11,8 +11,11 @@ Aplicación de reservas para classes para los usuarios de crossfit de Lleida
 
 ## 📋 Funcionalidades
 ✔ Reservar clases de corssfit
+
 ✔ Comprar sesiones y bonos de clases además de productos
+
 ✔ Sincronización con Firebase
+
 
 ## 🔧 Tecnologías
 - Kotlin, Jetpack Compose
